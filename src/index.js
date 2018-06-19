@@ -1,71 +1,35 @@
-const BASE_URL = 'http://banner.chaordicsystems.com/v1/recommendations';
+import { makeRequest } from './make-request';
 
-/**
- * Make an async request with XMLHttpRequest
- * https://stackoverflow.com/a/30008115
- *
- * @param {object} opts
- */
-function makeRequest(opts) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
+const BASE_REC_URL = 'http://banner.chaordicsystems.com/v1/recommendations';
 
-    let { params } = opts;
-    // We'll need to stringify if we've been given an object
-    // If we have a string, this is skipped.
-    if (params && typeof params === 'object') {
-      params = Object.keys(params)
-        .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(params[key])}`)
-        .join('&');
+export function buildParams(obj) {
+  const newObj = {};
+
+  Object.keys(obj).forEach((key) => {
+    if (obj[key]) {
+      newObj[key] = obj[key];
     }
-
-    xhr.open(opts.method, `${opts.url}${typeof params === 'string' ? `?${params}` : ''}`);
-    xhr.onload = (res) => {
-      const { status } = res.target;
-      if (status >= 200 && status < 300) {
-        resolve(xhr.response);
-      } else {
-        reject({
-          status,
-          statusText: xhr.statusText,
-        });
-      }
-    };
-    xhr.onerror = (res) => {
-      const { status } = res.target;
-      reject({
-        status,
-        statusText: xhr.statusText,
-      });
-    };
-
-    if (opts.headers) {
-      Object.keys(opts.headers).forEach(key => xhr.setRequestHeader(key, opts.headers[key]));
-    }
-
-    xhr.send(params);
   });
+
+  return Object.keys(newObj).length > 0 ? newObj : null;
 }
 
-function getRecommendations(options) {
+export function getRecommendations(options) {
+  const method = 'GET';
   const {
     page,
     source,
     deviceId,
     showLayout,
-  } = options;
+  } = options || {};
 
-  const params = {
+  const params = buildParams({
     page, source, deviceId, showLayout,
-  } || {};
+  });
 
   return makeRequest({
-    method: 'GET',
-    url: BASE_URL,
+    method,
+    url: BASE_REC_URL,
     params,
   });
 }
-
-module.exports = {
-  getRecommendations,
-};
