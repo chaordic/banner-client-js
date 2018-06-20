@@ -31,5 +31,5 @@ export function getRecommendations(options) {
     method,
     url: BASE_REC_URL,
     params,
-  });
+  }).then(JSON.parse);
 }
