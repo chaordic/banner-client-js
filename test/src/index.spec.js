@@ -1,24 +1,21 @@
-import chai from 'chai';
-import sinon from 'sinon';
-import sinonChai from 'sinon-chai';
-
 import * as request from '../../src/make-request';
 import { getRecommendations, buildParams } from '../../src';
 
-const expect = chai.expect;
-chai.use(sinonChai);
-
-describe('getRecommendations', function() {
+describe('getRecommendations', function () {
   let defaultMethod;
   let defaultUrl;
 
-  beforeEach(function() {
-    request.makeRequest = sinon.spy();
+  beforeEach(function () {
+    sinon.spy(request, 'makeRequest');
     defaultMethod = 'GET';
     defaultUrl = 'http://banner.chaordicsystems.com/v1/recommendations';
   });
 
-  it('should make a get request without params to defaultUrl', function() {
+  afterEach(function () {
+    request.makeRequest.restore();
+  });
+
+  it('should make a get request without params to defaultUrl', function () {
     expect(request.makeRequest).to.not.have.been.called;
     getRecommendations();
 
@@ -29,25 +26,29 @@ describe('getRecommendations', function() {
     });
   });
 
-  it('should make a get request with all parameters to defaultUrl', function() {
+  it('should make a get request with all parameters to defaultUrl', function () {
     const page = 'page';
     const source = 'source';
     const deviceId = 'deviceId';
     const showLayout = true;
 
     expect(request.makeRequest).to.not.have.been.called;
-    getRecommendations({ page, source, deviceId, showLayout });
+    getRecommendations({
+      page, source, deviceId, showLayout,
+    });
 
     expect(request.makeRequest).to.have.been.calledWith({
       method: defaultMethod,
       url: defaultUrl,
-      params: { page, source, deviceId, showLayout },
+      params: {
+        page, source, deviceId, showLayout,
+      },
     });
   });
 });
 
-describe('buildParams', function() {
-  it('should returns all values of an object which is a valid value', function() {
+describe('buildParams', function () {
+  it('should returns all values of an object which is a valid value', function () {
     const baseObj = {
       key1: true,
       key2: false,
@@ -67,7 +68,7 @@ describe('buildParams', function() {
     });
   });
 
-  it('should returns null if there are no valid values in object', function() {
+  it('should returns null if there are no valid values in object', function () {
     const baseObj = {
       key2: false,
       key5: 0,
