@@ -1,5 +1,5 @@
 {
-  "name": "banner-sdk",
+  "name": "@linx/banner-client-js",
   "version": "0.0.1",
   "description": "Banner SDK for Linx Banner API customers",
   "main": "dist/banner-sdk.prod.min.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WBerredo/banner-sdk.git"
+    "url": "git+https://github.com/chaordic/banner-client-js.git"
   },
   "keywords": [
     "banner",
@@ -30,9 +30,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/WBerredo/banner-sdk/issues"
+    "url": "https://github.com/chaordic/banner-client-js/issues"
   },
-  "homepage": "https://github.com/WBerredo/banner-sdk#readme",
+  "homepage": "https://github.com/chaordic/banner-client-js#readme",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-eslint": "^8.2.3",
