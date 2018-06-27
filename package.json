@@ -1,5 +1,5 @@
 {
-  "name": "@linx/banner-client-js",
+  "name": "linx-banner-client-js",
   "version": "0.0.1",
   "description": "Banner SDK for Linx Banner API customers",
   "main": "dist/banner-sdk.prod.min.js",
