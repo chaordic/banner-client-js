@@ -5,8 +5,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'umd',
-    library: 'LinxBanner',
-    globalObject: 'typeof self !== \'undefined\' ? self : this',
+    library: 'banner',
+    globalObject: 'window.linx = window.linx || {}',
   },
   module: {
     rules: [
