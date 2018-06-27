@@ -1,6 +1,6 @@
 import { makeRequest } from './make-request';
 
-const BASE_REC_URL = 'http://banner.chaordicsystems.com/v1/recommendations';
+const BASE_REC_URL = '//banner.chaordicsystems.com/v1/recommendations';
 
 export function buildParams(obj) {
   const newObj = {};

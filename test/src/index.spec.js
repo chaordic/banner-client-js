@@ -8,7 +8,7 @@ describe('getRecommendations', function () {
   beforeEach(function () {
     sinon.spy(request, 'makeRequest');
     defaultMethod = 'GET';
-    defaultUrl = 'http://banner.chaordicsystems.com/v1/recommendations';
+    defaultUrl = '//banner.chaordicsystems.com/v1/recommendations';
   });
 
   afterEach(function () {
