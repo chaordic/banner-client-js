@@ -1,0 +1,8 @@
+# Dependencies
+node_modules
+
+# distributable version
+dist
+
+# debug
+npm-debug.log
