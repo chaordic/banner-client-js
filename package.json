@@ -1,13 +1,13 @@
 {
-  "name": "@linx/banner-client-js",
-  "version": "0.0.1",
+  "name": "linx-banner-client-js",
+  "version": "0.1.0",
   "description": "Banner SDK for Linx Banner API customers",
   "main": "dist/banner-sdk.prod.min.js",
   "scripts": {
     "lint": "eslint src",
     "test": "npm run lint && karma start",
     "build": "webpack --config webpack.prod.js",
-    "release": "standard-version"
+    "release": "npm test && standard-version && git push --follow-tags && npm publish"
   },
   "repository": {
     "type": "git",
