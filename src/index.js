@@ -1,8 +1,7 @@
 import { makeRequest } from './make-request';
+import config from './config';
 
-const BASE_REC_URL = '//banner.chaordicsystems.com/v1/recommendations';
-
-export function buildParams(obj) {
+export function filterEmptyFields(obj) {
   const newObj = {};
 
   Object.keys(obj).forEach((key) => {
@@ -23,13 +22,13 @@ export function getRecommendations(options) {
     showLayout,
   } = options || {};
 
-  const params = buildParams({
+  const params = filterEmptyFields({
     page, source, deviceId, showLayout,
   });
 
   return makeRequest({
     method,
-    url: BASE_REC_URL,
+    url: `${config.server.baseUrl}${config.server.recommendationUrl}`,
     params,
   }).then(JSON.parse);
 }

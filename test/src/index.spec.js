@@ -1,14 +1,18 @@
 import * as request from '../../src/make-request';
-import { getRecommendations, buildParams } from '../../src';
+import config from '../../src/config';
+import { getRecommendations, filterEmptyFields } from '../../src';
 
 describe('getRecommendations', function () {
   let defaultMethod;
   let defaultUrl;
 
+  before(function () {
+    defaultMethod = 'GET';
+    defaultUrl = `${config.server.baseUrl}${config.server.recommendationUrl}`;
+  });
+
   beforeEach(function () {
     sinon.spy(request, 'makeRequest');
-    defaultMethod = 'GET';
-    defaultUrl = '//banner.chaordicsystems.com/v1/recommendations';
   });
 
   afterEach(function () {
@@ -47,7 +51,7 @@ describe('getRecommendations', function () {
   });
 });
 
-describe('buildParams', function () {
+describe('filterEmptyFields', function () {
   it('should returns all values of an object which is a valid value', function () {
     const baseObj = {
       key1: true,
@@ -59,7 +63,7 @@ describe('buildParams', function () {
       key7: null,
     };
 
-    const newObbj = buildParams(baseObj);
+    const newObbj = filterEmptyFields(baseObj);
 
     expect(newObbj).to.be.deep.equal({
       key1: true,
@@ -76,7 +80,7 @@ describe('buildParams', function () {
       key7: null,
     };
 
-    const newObbj = buildParams(baseObj);
+    const newObbj = filterEmptyFields(baseObj);
 
     expect(newObbj).to.be.equal(null);
   });
