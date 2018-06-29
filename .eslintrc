@@ -7,9 +7,11 @@
     }
   },
   "env": {
-    "node": true
+    "browser": true
   },
   "rules": {
-    "indent": [2, 2] 
+    "indent": [2, 2],
+    "prefer-promise-reject-errors": 0,
+    "import/prefer-default-export": 0
   }
 }

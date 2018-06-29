@@ -1,3 +1,5 @@
+const webpack = require('./webpack.dev');
+
 module.exports = function(config) {
   config.set({
     frameworks: ['mocha', 'chai'],
@@ -7,7 +9,7 @@ module.exports = function(config) {
     preprocessors: {
       'test/**/*.js': ['webpack'],
     },
-    webpack: {},
+    webpack,
     webpackMiddleware: {
       stats: 'errors-only',
     },
