@@ -1,4 +1,18 @@
 # banner-client-js
+
+[![Version][version-svg]][package-url] [![CircleCI][circleci-svg]][circleci-url] [![License][license-image]][license-url] [![Downloads][downloads-image]][downloads-url] [![jsDelivr Hits][jsdelivr-badge]][jsdelivr-hits]
+
+[circleci-svg]: https://circleci.com/gh/chaordic/banner-client-js.svg?style=svg
+[circleci-url]: https://circleci.com/gh/chaordic/banner-client-js
+[version-svg]: https://img.shields.io/npm/v/@linx-impulse/banner-client-js.svg?style=flat-square
+[package-url]: https://npmjs.org/package/@linx-impulse/banner-client-js
+[license-image]: https://img.shields.io/badge/license-MIT-green.svg?style=flat-square
+[license-url]: LICENSE.txt
+[downloads-image]: https://img.shields.io/npm/dm/@linx-impulse/banner-client-js.svg?style=flat-square
+[downloads-url]: http://npm-stat.com/charts.html?package=@linx-impulse/banner-client-js
+[jsdelivr-badge]: https://data.jsdelivr.com/v1/package/npm/@linx-impulse/banner-client-js/badge
+[jsdelivr-hits]: https://www.jsdelivr.com/package/npm/@linx-impulse/banner-client-js
+
 Front end Banner SDK for Linx Banner API customers
 
 ## Installation
@@ -19,15 +33,15 @@ const LinxBanner = window.linx.banner;
 ### npm
 
 ```sh
-npm install --save linx-banner-client-js
+npm install --save @linx-impulse/banner-client-js
 ```
 
 It should be called this way:
 ```javascript
 
-const LinxBanner = require('linx-banner-client-js');
+const LinxBanner = require('@linx-impulse/banner-client-js');
 // or
-import * as LinxBanner from 'linx-banner-client-js';
+import { BannerClient } from '@linx-impulse/banner-client-js';
 ```
 
 ## Usage
