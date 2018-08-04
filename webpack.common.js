@@ -4,9 +4,9 @@ module.exports = {
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
-    libraryTarget: 'umd',
-    library: 'banner',
-    globalObject: 'window.linx = window.linx || {}',
+    library: ['linx', 'banner'],
+    libraryExport: 'BannerClient',
+    libraryTarget: 'window',
   },
   module: {
     rules: [

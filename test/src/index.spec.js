@@ -1,8 +1,8 @@
 import * as request from '../../src/make-request';
 import config from '../../src/config';
-import { getRecommendations, filterEmptyFields } from '../../src';
+import { BannerClient } from '../../src';
 
-describe('getRecommendations', function () {
+describe('BannerClient.getRecommendations', function () {
   let defaultMethod;
   let defaultUrl;
 
@@ -21,7 +21,7 @@ describe('getRecommendations', function () {
 
   it('should make a get request without params to defaultUrl', function () {
     expect(request.makeRequest).to.not.have.been.called;
-    getRecommendations();
+    BannerClient.getRecommendations();
 
     expect(request.makeRequest).to.have.been.calledWith({
       method: defaultMethod,
@@ -37,7 +37,7 @@ describe('getRecommendations', function () {
     const showLayout = true;
 
     expect(request.makeRequest).to.not.have.been.called;
-    getRecommendations({
+    BannerClient.getRecommendations({
       page, source, deviceId, showLayout,
     });
 
@@ -48,40 +48,5 @@ describe('getRecommendations', function () {
         page, source, deviceId, showLayout,
       },
     });
-  });
-});
-
-describe('filterEmptyFields', function () {
-  it('should returns all values of an object which is a valid value', function () {
-    const baseObj = {
-      key1: true,
-      key2: false,
-      key3: 'something',
-      key4: 2,
-      key5: 0,
-      key6: undefined,
-      key7: null,
-    };
-
-    const newObbj = filterEmptyFields(baseObj);
-
-    expect(newObbj).to.be.deep.equal({
-      key1: true,
-      key3: 'something',
-      key4: 2,
-    });
-  });
-
-  it('should returns null if there are no valid values in object', function () {
-    const baseObj = {
-      key2: false,
-      key5: 0,
-      key6: undefined,
-      key7: null,
-    };
-
-    const newObbj = filterEmptyFields(baseObj);
-
-    expect(newObbj).to.be.equal(null);
   });
 });
