@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 module.exports = merge(common, {
   output: {
-    filename: 'banner-sdk.prod.min.js',
+    filename: 'linx-banner.js',
   },
   mode: 'production',
   plugins: [

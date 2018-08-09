@@ -1,8 +1,8 @@
 {
-  "name": "linx-banner-client-js",
+  "name": "@linx-impulse/banner-client-js",
   "version": "0.1.0",
   "description": "Banner SDK for Linx Banner API customers",
-  "main": "dist/banner-sdk.prod.min.js",
+  "main": "src/index.js",
   "scripts": {
     "lint": "eslint src",
     "test": "npm run lint && karma start",
@@ -23,10 +23,11 @@
     {
       "name": "Wesley Berrêdo",
       "email": "wberredo@gmail.com"
+    },
+    {
+      "name": "Andrew C. Pacifico",
+      "email": "andrewpacifico@neemu.com"
     }
-  ],
-  "files": [
-    "dist"
   ],
   "license": "MIT",
   "bugs": {
