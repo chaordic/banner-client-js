@@ -12,6 +12,16 @@
   "rules": {
     "indent": [2, 2],
     "prefer-promise-reject-errors": 0,
-    "import/prefer-default-export": 0
+    "import/prefer-default-export": 0,
+    "object-curly-newline": ["error", {
+      "consistent": true
+    }]
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.common.js"
+      }
+    }
   }
 }
