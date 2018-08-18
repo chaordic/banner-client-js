@@ -1,6 +1,6 @@
 const webpack = require('./webpack.dev');
 
-module.exports = function(config) {
+module.exports = function karmaConfig(config) {
   config.set({
     frameworks: ['mocha', 'chai'],
     files: [
@@ -13,6 +13,7 @@ module.exports = function(config) {
     webpackMiddleware: {
       stats: 'errors-only',
     },
+    reporters: ['spec'],
     browsers: ['ChromeHeadless'],
     singleRun: true,
   });
