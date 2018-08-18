@@ -2,7 +2,7 @@ import { ajax } from '@linx-impulse/commons-js/http/ajax';
 import config from './config';
 
 export const BannerClient = {
-  getRecommendations({ page, source, deviceId, showLayout } = {}) {
+  getRecommendations({ page, source, deviceId, showLayout, userId } = {}) {
     if (!deviceId) {
       return Promise.reject(new TypeError('deviceId is required to get banners'));
     }
@@ -18,7 +18,7 @@ export const BannerClient = {
     return new Promise((resolve, reject) => {
       ajax({
         url: `${config.server.baseUrl}${config.server.recommendationUrl}`,
-        params: { deviceId, page, source, showLayout },
+        params: { deviceId, page, source, showLayout, userId },
         success: resolve,
         error: reject,
       });

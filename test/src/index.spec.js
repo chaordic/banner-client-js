@@ -47,6 +47,7 @@ describe('BannerClient.getRecommendations', function () {
       source: 'desktop',
       page: 'home',
       showLayout: true,
+      userId: 'user',
     };
 
     this.ajaxStub.yieldsTo('success', {});
