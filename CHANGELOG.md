@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/chaordic/banner-client-js/compare/v1.5.0...v1.6.0) (2018-08-20)
+
+
+### Features
+
+* add userId to getRecommendations ([6c90cb5](https://github.com/chaordic/banner-client-js/commit/6c90cb5))
+
+
+
 <a name="0.2.0"></a>
 # 0.2.0 (2018-08-09)
 
