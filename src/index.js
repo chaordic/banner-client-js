@@ -1,36 +1,27 @@
-import { makeRequest } from './make-request';
+import { ajax } from '@linx-impulse/commons-js/http/ajax';
 import config from './config';
 
-function filterEmptyFields(obj) {
-  const newObj = {};
-
-  Object.keys(obj).forEach((key) => {
-    if (obj[key]) {
-      newObj[key] = obj[key];
-    }
-  });
-
-  return Object.keys(newObj).length > 0 ? newObj : null;
-}
-
 export const BannerClient = {
-  getRecommendations(options) {
-    const method = 'GET';
-    const {
-      page,
-      source,
-      deviceId,
-      showLayout,
-    } = options || {};
+  getRecommendations({ page, source, deviceId, showLayout } = {}) {
+    if (!deviceId) {
+      return Promise.reject(new TypeError('deviceId is required to get banners'));
+    }
 
-    const params = filterEmptyFields({
-      page, source, deviceId, showLayout,
+    if (!page) {
+      return Promise.reject(new TypeError('page is required to get banners'));
+    }
+
+    if (!source) {
+      return Promise.reject(new TypeError('source is required to get banners'));
+    }
+
+    return new Promise((resolve, reject) => {
+      ajax({
+        url: `${config.server.baseUrl}${config.server.recommendationUrl}`,
+        params: { deviceId, page, source, showLayout },
+        success: resolve,
+        error: reject,
+      });
     });
-
-    return makeRequest({
-      method,
-      url: `${config.server.baseUrl}${config.server.recommendationUrl}`,
-      params,
-    }).then(JSON.parse);
   },
 };

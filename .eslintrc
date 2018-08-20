@@ -1,17 +1,26 @@
 {
   "extends": "airbnb",
-  "parserOptions": {
-    "ecmaVersion": 2017,
-    "ecmaFeatures": {
-      "experimentalObjectRestSpread": true
-    }
-  },
   "env": {
-    "browser": true
+    "browser": true,
+    "mocha": true
   },
   "rules": {
-    "indent": [2, 2],
-    "prefer-promise-reject-errors": 0,
-    "import/prefer-default-export": 0
+    "import/prefer-default-export": 0,
+    "object-curly-newline": ["error", {
+      "consistent": true
+    }],
+    "no-plusplus": ["error", {
+      "allowForLoopAfterthoughts": true
+    }],
+    "no-param-reassign": ["error", {
+      "props": false
+    }]
+  },
+  "settings": {
+    "import/resolver": {
+      "webpack": {
+        "config": "webpack.common.js"
+      }
+    }
   }
 }

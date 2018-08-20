@@ -1,52 +1,99 @@
-import * as request from '../../src/make-request';
-import config from '../../src/config';
+import * as cmAjax from '@linx-impulse/commons-js/http/ajax';
+
 import { BannerClient } from '../../src';
 
 describe('BannerClient.getRecommendations', function () {
-  let defaultMethod;
-  let defaultUrl;
-
-  before(function () {
-    defaultMethod = 'GET';
-    defaultUrl = `${config.server.baseUrl}${config.server.recommendationUrl}`;
-  });
-
   beforeEach(function () {
-    sinon.spy(request, 'makeRequest');
+    this.ajaxStub = sinon.stub(cmAjax, 'ajax');
   });
 
   afterEach(function () {
-    request.makeRequest.restore();
+    this.ajaxStub.restore();
   });
 
-  it('should make a get request without params to defaultUrl', function () {
-    expect(request.makeRequest).to.not.have.been.called;
-    BannerClient.getRecommendations();
-
-    expect(request.makeRequest).to.have.been.calledWith({
-      method: defaultMethod,
-      url: defaultUrl,
-      params: null,
+  it('should reject when no deviceId is provided', function () {
+    return BannerClient.getRecommendations({
+      page: 'home',
+      source: 'desktop',
+    }).catch((err) => {
+      expect(this.ajaxStub).to.not.have.been.called;
+      expect(err).to.be.instanceOf(TypeError);
     });
   });
 
-  it('should make a get request with all parameters to defaultUrl', function () {
-    const page = 'page';
-    const source = 'source';
-    const deviceId = 'deviceId';
-    const showLayout = true;
-
-    expect(request.makeRequest).to.not.have.been.called;
-    BannerClient.getRecommendations({
-      page, source, deviceId, showLayout,
+  it('should reject when no page is provided', function () {
+    return BannerClient.getRecommendations({
+      deviceId: 'device',
+      source: 'desktop',
+    }).catch((err) => {
+      expect(this.ajaxStub).to.not.have.been.called;
+      expect(err).to.be.instanceOf(TypeError);
     });
+  });
 
-    expect(request.makeRequest).to.have.been.calledWith({
-      method: defaultMethod,
-      url: defaultUrl,
-      params: {
-        page, source, deviceId, showLayout,
-      },
+  it('should reject when no source is provided', function () {
+    return BannerClient.getRecommendations({
+      deviceId: 'device',
+      page: 'home',
+    }).catch((err) => {
+      expect(this.ajaxStub).to.not.have.been.called;
+      expect(err).to.be.instanceOf(TypeError);
     });
+  });
+
+  it('should make an ajax request with params provided', function () {
+    const params = {
+      deviceId: 'device',
+      source: 'desktop',
+      page: 'home',
+      showLayout: true,
+    };
+
+    this.ajaxStub.yieldsTo('success', {});
+
+    return BannerClient.getRecommendations(params).then(() => {
+      expect(this.ajaxStub)
+        .to
+        .have
+        .been
+        .calledWithMatch(sinon.match({ params }));
+    });
+  });
+
+  it('should resolve with data sent from ajax response', function () {
+    const params = {
+      deviceId: 'device',
+      source: 'desktop',
+      page: 'home',
+      showLayout: true,
+    };
+
+    const data = [{ id: 'banner1' }, { id: 'banner2' }];
+    this.ajaxStub.yieldsTo('success', data);
+
+    return expect(BannerClient.getRecommendations(params))
+      .to
+      .eventually
+      .be
+      .deep
+      .equal(data);
+  });
+
+  it('should reject with error sent from ajax request', function () {
+    const params = {
+      deviceId: 'device',
+      source: 'desktop',
+      page: 'home',
+      showLayout: true,
+    };
+
+    const err = new Error('error');
+    this.ajaxStub.yieldsTo('error', err);
+
+    return expect(BannerClient.getRecommendations(params))
+      .to
+      .eventually
+      .be
+      .rejectedWith(err);
   });
 });

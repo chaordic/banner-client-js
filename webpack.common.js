@@ -12,14 +12,15 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /node_modules/,
+        include: [
+          /src/,
+          /theme/,
+          /test/,
+          /node_modules\/@linx-impulse/,
+          /node_modules\/chai.*/,
+          /node_modules\/sinon.*/,
+        ],
         loader: 'babel-loader',
-      },
-      {
-        enforce: 'pre',
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: ['babel-loader', 'eslint-loader'],
       },
     ],
   },
