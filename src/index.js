@@ -9,6 +9,7 @@ export const BannerClient = {
     showLayout,
     userId,
     homologation,
+    timeout,
   } = {}) {
     if (!deviceId) {
       return Promise.reject(new TypeError('deviceId is required to get banners'));
@@ -28,6 +29,7 @@ export const BannerClient = {
         params: { deviceId, page, source, showLayout, userId, homologation },
         success: resolve,
         error: reject,
+        timeout,
       });
     });
   },
