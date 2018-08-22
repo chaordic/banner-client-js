@@ -64,6 +64,6 @@
     "webpack-merge": "^4.1.4"
   },
   "dependencies": {
-    "@linx-impulse/commons-js": "^3.2.1"
+    "@linx-impulse/commons-js": "^3.3.0"
   }
 }
