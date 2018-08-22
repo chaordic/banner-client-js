@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/chaordic/banner-client-js/compare/v1.7.0...v1.8.0) (2018-08-22)
+
+
+### Features
+
+* add support to timeout ([4386af7](https://github.com/chaordic/banner-client-js/commit/4386af7))
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/chaordic/banner-client-js/compare/v1.6.0...v1.7.0) (2018-08-22)
 
