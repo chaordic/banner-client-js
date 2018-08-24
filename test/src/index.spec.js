@@ -42,18 +42,32 @@ describe('BannerClient.getRecommendations', function () {
   });
 
   it('should make an ajax request with params provided', function () {
-    const params = {
+    const paramsClient = {
       deviceId: 'device',
       source: 'desktop',
       page: 'home',
       showLayout: true,
       userId: 'user',
       homologation: true,
+      url: '',
+    };
+
+    const params = {
+      deviceId: 'device',
+      page: 'home',
+      source: 'desktop',
+      showLayout: true,
+      userId: 'user',
+      homologation: true,
+      categoryId: [],
+      productId: undefined,
+      tagId: [],
+      url: '',
     };
 
     this.ajaxStub.yieldsTo('success', {});
 
-    return BannerClient.getRecommendations(params).then(() => {
+    return BannerClient.getRecommendations(paramsClient).then(() => {
       expect(this.ajaxStub)
         .to
         .have
@@ -97,5 +111,136 @@ describe('BannerClient.getRecommendations', function () {
       .eventually
       .be
       .rejectedWith(err);
+  });
+
+  it('should pass formattedCategories to ajax request', function () {
+    const categories = [
+      {
+        id: 'Autoajuda',
+        name: 'Autoajuda',
+        parents: ['Livros']
+      },
+      {
+        id: 'Livros',
+        name:'Livros'
+      },  
+      {
+        id: 'Desenvolvimento Pessoal',
+        name: 'Desenvolvimento Pessoal',
+        parents: ['Autoajuda' ]
+      }
+    ];
+    
+    const paramsClient = {
+      deviceId: 'device',
+      source: 'desktop',
+      page: 'home',
+      showLayout: true,
+      categories,
+    };
+
+    const params = {
+      categoryId: ['Livros', 'Autoajuda', 'Desenvolvimento Pessoal'],
+      deviceId: 'device',
+      homologation: undefined,
+      page: 'home',
+      productId: undefined,
+      showLayout: true, 
+      source: 'desktop',         
+      tagId: [],
+      url: undefined,
+      userId: undefined,
+    };
+
+    this.ajaxStub.yieldsTo('success', {});
+
+    return BannerClient.getRecommendations(paramsClient).then(() => {
+      expect(this.ajaxStub)
+        .to
+        .have
+        .been
+        .calledWithMatch(sinon.match({ params }));
+    });
+  });
+
+  it('should pass formattedTags to ajax request', function () {
+    const tags = [
+      {
+        id: 'Autoajuda',
+        name: 'Autoajuda',
+      },
+      {
+        id: 'Livros',
+        name:'Livros'
+      },  
+      {
+        id: 'Desenvolvimento Pessoal',
+        name: 'Desenvolvimento Pessoal',
+      }
+    ];
+    
+    const paramsClient = {
+      deviceId: 'device',
+      source: 'desktop',
+      page: 'home',
+      showLayout: true,
+      tags,
+    };
+
+    const params = {
+      categoryId: [],
+      deviceId: 'device',
+      homologation: undefined,
+      page: 'home',
+      productId: undefined,
+      showLayout: true, 
+      source: 'desktop',         
+      tagId: ['Autoajuda', 'Livros', 'Desenvolvimento Pessoal'],
+      url: undefined,
+      userId: undefined,
+    };
+
+    this.ajaxStub.yieldsTo('success', {});
+
+    return BannerClient.getRecommendations(paramsClient).then(() => {
+      expect(this.ajaxStub)
+        .to
+        .have
+        .been
+        .calledWithMatch(sinon.match({ params }));
+    });
+  });
+
+  it('should pass product  to ajax request', function () {    
+    const paramsClient = {
+      deviceId: 'device',
+      source: 'desktop',
+      page: 'home',
+      showLayout: true,
+      product: { id: 'prd-00'}
+    };
+
+    const params = {
+      categoryId: [],
+      deviceId: 'device',
+      homologation: undefined,
+      page: 'home',
+      productId: 'prd-00',
+      showLayout: true, 
+      source: 'desktop',         
+      tagId: [],
+      url: undefined,
+      userId: undefined,
+    };
+
+    this.ajaxStub.yieldsTo('success', {});
+
+    return BannerClient.getRecommendations(paramsClient).then(() => {
+      expect(this.ajaxStub)
+        .to
+        .have
+        .been
+        .calledWithMatch(sinon.match({ params }));
+    });
   });
 });

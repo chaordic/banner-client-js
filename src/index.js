@@ -6,7 +6,7 @@ function formattedTags(tags) {
 }
 
 function getParent(categories, item) {
-  return categories.find(category => (
+  return (categories || []).find(category => (
     Array.isArray(category.parents) && category.parents.indexOf(item.id) !== -1
   ));
 }
@@ -16,7 +16,13 @@ function formattedCategories(categories) {
   const filteredCategories = (categories || []).filter(category => category && category.id);
 
   // Find the root node
-  let item = filteredCategories.find(category => !category.parents);
+  let item = filteredCategories.find(category => (
+    (
+      !category.parents || (
+        Array.isArray(category.parents) && !category.parents.length
+      )
+    )
+  ));
   const ids = [];
 
   while (typeof item === 'object') {
@@ -63,7 +69,7 @@ export const BannerClient = {
           userId,
           homologation,
           categoryId: formattedCategories(categories),
-          productId: product,
+          productId: (product || {}).id,
           tagId: formattedTags(tags),
           url,
         },
