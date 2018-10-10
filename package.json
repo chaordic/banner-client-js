@@ -1,6 +1,6 @@
 {
   "name": "@linx-impulse/banner-client-js",
-  "version": "1.8.1",
+  "version": "1.9.0",
   "description": "Banner SDK for Linx Banner API customers",
   "main": "src/index.js",
   "scripts": {
