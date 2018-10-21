@@ -39,15 +39,19 @@ function getDeviceId() {
   return id;
 }
 
-function getParent(categories, item) {
+function getFirstChild(categories, item) {
   return (categories || []).find(category => (
-    Array.isArray(category.parents) && category.parents.indexOf(item.id) !== -1
+    !category.used
+    && Array.isArray(category.parents)
+    && category.parents.indexOf(item.id) !== -1
   ));
 }
 
 function formattedCategories(categories) {
   // Filter wrong formatted
-  const filteredCategories = (categories || []).filter(category => category && category.id);
+  const filteredCategories = (categories || [])
+    .filter(category => category && category.id)
+    .map(category => ({ id: category.id, parents: category.parents }));
 
   // Find the root node
   let item = filteredCategories.find(category => (
@@ -61,7 +65,8 @@ function formattedCategories(categories) {
 
   while (typeof item === 'object') {
     ids.push(item.id);
-    item = getParent(filteredCategories, item);
+    item.used = true;
+    item = getFirstChild(filteredCategories, item);
   }
   return ids;
 }
