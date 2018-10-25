@@ -3,7 +3,7 @@ export default {
     deviceId: 'chaordic_browserId',
   },
   server: {
-    baseUrl: '//banner.chaordicsystems.com/banner/v1',
+    baseUrl: '//api.linximpulse.com/engage/b/v1',
     recommendationUrl: '/recommendations',
   },
 };
