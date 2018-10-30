@@ -19,7 +19,7 @@ Front end Banner SDK for Linx Banner API customers
 
 ### CDN
 ```html
-<script src="//unpkg.com/linx-banner-client-js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@linx-impulse/banner-client-js/dist/linx-banner.min.js"></script>
 ```
 
 There will be created a property called **banner** in global linx object.
@@ -36,7 +36,7 @@ const LinxBanner = window.linx.banner;
 npm install --save @linx-impulse/banner-client-js
 ```
 
-It should be called this way:
+Using some module bundler like Webpack, it should be called this way:
 ```javascript
 
 const LinxBanner = require('@linx-impulse/banner-client-js');
@@ -51,8 +51,14 @@ import { BannerClient } from '@linx-impulse/banner-client-js';
   * options (object)
     * **page**(string): current page. Ex: home, product, category, subcategory, cart.
     * **source**(string): device of user. Ex: app, desktop, mobile.
-    * **deviceId**(string): device identifier.
     * **showLayout**(boolean): whether or not bring layout properties previously set. Default: `false`.
+    * **userId**(string): the user identifier, used to personalize slides even when user access a new device.
+    * **homologation**(boolean): enable banner homologation. With this feature enabled the disabled banners will be sent on api response.
+    * **timeout**(number): defines a timeout for request in milliseconds.
+    * **categories**(array): list of categories of the page. This information is used by api to apply the exhibition rules for banners.
+    * **product**(object): object containing product data. Useful for product pages.
+    * **tags**(array): array of tags of the page.
+    * **url**(string): url of the page.
 
 PS: *options* parameter is not required, neither any of these properties.
 
@@ -61,8 +67,51 @@ PS: *options* parameter is not required, neither any of these properties.
 LinxBanner.getRecommendations({
   page: 'home',
   source: 'desktop',
-  deviceId: 'usr2018abc',
   showLayout: true,
+  userId: 'user01',
+})
+  .then((banners) => {
+    console.log('Banners: ', banners);
+  })
+  .catch((error) => {
+    console.error('Banners error: ', error);
+  });
+```
+
+```javascript
+LinxBanner.getRecommendations({
+  page: 'product',
+  source: 'mobile',
+  showLayout: true,
+  product: {
+    id: 'prod001',
+  },
+  url: 'https://www.yourdomain/product/prod001'
+})
+  .then((banners) => {
+    console.log('Banners: ', banners);
+  })
+  .catch((error) => {
+    console.error('Banners error: ', error);
+  });
+```
+
+```javascript
+LinxBanner.getRecommendations({
+  page: 'subcategory',
+  source: 'desktop',
+  homologation: true,
+  showLayout: true,
+  categories: [
+    { id: 'cat01', parents: null },
+    { id: 'cat02', parents: [ 'cat01' ] },
+  ],
+  tags: [
+    { id: 'tag01' },
+    { id: 'tag02' },
+    { id: 'tag03' },
+  ],
+  url: 'https://www.yourdomain/category/cat01/cat02'
 })
   .then((banners) => {
     console.log('Banners: ', banners);
