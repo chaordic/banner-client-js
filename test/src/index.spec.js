@@ -11,19 +11,8 @@ describe('BannerClient.getRecommendations', function () {
     this.ajaxStub.restore();
   });
 
-  it('should reject when no deviceId is provided', function () {
-    return BannerClient.getRecommendations({
-      page: 'home',
-      source: 'desktop',
-    }).catch((err) => {
-      expect(this.ajaxStub).to.not.have.been.called;
-      expect(err).to.be.instanceOf(TypeError);
-    });
-  });
-
   it('should reject when no page is provided', function () {
     return BannerClient.getRecommendations({
-      deviceId: 'device',
       source: 'desktop',
     }).catch((err) => {
       expect(this.ajaxStub).to.not.have.been.called;
@@ -33,7 +22,6 @@ describe('BannerClient.getRecommendations', function () {
 
   it('should reject when no source is provided', function () {
     return BannerClient.getRecommendations({
-      deviceId: 'device',
       page: 'home',
     }).catch((err) => {
       expect(this.ajaxStub).to.not.have.been.called;
@@ -43,7 +31,6 @@ describe('BannerClient.getRecommendations', function () {
 
   it('should make an ajax request with params provided', function () {
     const paramsClient = {
-      deviceId: 'device',
       source: 'desktop',
       page: 'home',
       showLayout: true,
@@ -53,7 +40,6 @@ describe('BannerClient.getRecommendations', function () {
     };
 
     const params = {
-      deviceId: 'device',
       page: 'home',
       source: 'desktop',
       showLayout: true,
@@ -78,7 +64,6 @@ describe('BannerClient.getRecommendations', function () {
 
   it('should resolve with data sent from ajax response', function () {
     const params = {
-      deviceId: 'device',
       source: 'desktop',
       page: 'home',
       showLayout: true,
@@ -97,7 +82,6 @@ describe('BannerClient.getRecommendations', function () {
 
   it('should reject with error sent from ajax request', function () {
     const params = {
-      deviceId: 'device',
       source: 'desktop',
       page: 'home',
       showLayout: true,
@@ -123,16 +107,15 @@ describe('BannerClient.getRecommendations', function () {
       {
         id: 'Livros',
         name:'Livros'
-      },  
+      },
       {
         id: 'Desenvolvimento Pessoal',
         name: 'Desenvolvimento Pessoal',
         parents: ['Autoajuda' ]
       }
     ];
-    
+
     const paramsClient = {
-      deviceId: 'device',
       source: 'desktop',
       page: 'home',
       showLayout: true,
@@ -141,12 +124,11 @@ describe('BannerClient.getRecommendations', function () {
 
     const params = {
       categoryId: ['Livros', 'Autoajuda', 'Desenvolvimento Pessoal'],
-      deviceId: 'device',
       homologation: undefined,
       page: 'home',
       productId: undefined,
-      showLayout: true, 
-      source: 'desktop',         
+      showLayout: true,
+      source: 'desktop',
       tagId: [],
       url: undefined,
       userId: undefined,
@@ -172,15 +154,14 @@ describe('BannerClient.getRecommendations', function () {
       {
         id: 'Livros',
         name:'Livros'
-      },  
+      },
       {
         id: 'Desenvolvimento Pessoal',
         name: 'Desenvolvimento Pessoal',
       }
     ];
-    
+
     const paramsClient = {
-      deviceId: 'device',
       source: 'desktop',
       page: 'home',
       showLayout: true,
@@ -189,12 +170,11 @@ describe('BannerClient.getRecommendations', function () {
 
     const params = {
       categoryId: [],
-      deviceId: 'device',
       homologation: undefined,
       page: 'home',
       productId: undefined,
-      showLayout: true, 
-      source: 'desktop',         
+      showLayout: true,
+      source: 'desktop',
       tagId: ['Autoajuda', 'Livros', 'Desenvolvimento Pessoal'],
       url: undefined,
       userId: undefined,
@@ -211,9 +191,8 @@ describe('BannerClient.getRecommendations', function () {
     });
   });
 
-  it('should pass product  to ajax request', function () {    
+  it('should pass product to ajax request', function () {
     const paramsClient = {
-      deviceId: 'device',
       source: 'desktop',
       page: 'home',
       showLayout: true,
@@ -222,12 +201,11 @@ describe('BannerClient.getRecommendations', function () {
 
     const params = {
       categoryId: [],
-      deviceId: 'device',
       homologation: undefined,
       page: 'home',
       productId: 'prd-00',
-      showLayout: true, 
-      source: 'desktop',         
+      showLayout: true,
+      source: 'desktop',
       tagId: [],
       url: undefined,
       userId: undefined,
