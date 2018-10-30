@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.9.2"></a>
+## [1.9.2](https://github.com/chaordic/banner-client-js/compare/v1.9.0...v1.9.2) (2018-10-30)
+
+
+### Bug Fixes
+
+* formattedCategories problem with categories that have a parent with same id ([dba47cc](https://github.com/chaordic/banner-client-js/commit/dba47cc))
+
+
+
 <a name="1.9.0"></a>
 # [1.9.0](https://github.com/chaordic/banner-client-js/compare/v1.8.1...v1.9.0) (2018-10-10)
 
