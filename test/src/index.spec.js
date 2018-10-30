@@ -145,6 +145,54 @@ describe('BannerClient.getRecommendations', function () {
     });
   });
 
+  it('should not break with recursive categories', function () {
+    const categories = [
+      {
+        id: 'Medicina',
+        name: 'Medicina',
+        parents: ['Livros']
+      },
+      {
+        id: 'Livros',
+        name:'Livros'
+      },
+      {
+        id: 'Medicina',
+        name: 'Medicina',
+        parents: ['Medicina']
+      }
+    ];
+
+    const paramsClient = {
+      source: 'desktop',
+      page: 'home',
+      showLayout: true,
+      categories,
+    };
+
+    const params = {
+      categoryId: ['Livros', 'Medicina', 'Medicina'],
+      homologation: undefined,
+      page: 'home',
+      productId: undefined,
+      showLayout: true,
+      source: 'desktop',
+      tagId: [],
+      url: undefined,
+      userId: undefined,
+    };
+
+    this.ajaxStub.yieldsTo('success', {});
+
+    return BannerClient.getRecommendations(paramsClient).then(() => {
+      expect(this.ajaxStub)
+        .to
+        .have
+        .been
+        .calledWithMatch(sinon.match({ params }));
+    });
+  });
+
   it('should pass formattedTags to ajax request', function () {
     const tags = [
       {
