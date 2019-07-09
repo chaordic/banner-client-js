@@ -269,4 +269,36 @@ describe('BannerClient.getRecommendations', function () {
         .calledWithMatch(sinon.match({ params }));
     });
   });
+
+  it('should pass searchQuery to ajax request', function() {
+    const paramsClient = {
+      source: 'desktop',
+      page: 'search',
+      showLayout: true,
+      searchQuery: 'lorem ipsum',
+    };
+
+    const params = {
+      categoryId: [],
+      homologation: undefined,
+      page: 'search',
+      productId: undefined,
+      showLayout: true,
+      source: 'desktop',
+      tagId: [],
+      url: undefined,
+      userId: undefined,
+      searchQuery: 'lorem ipsum',
+    };
+
+    this.ajaxStub.yieldsTo('success', {});
+
+    return BannerClient.getRecommendations(paramsClient).then(() => {
+      expect(this.ajaxStub)
+        .to
+        .have
+        .been
+        .calledWithMatch(sinon.match({ params }));
+    });
+  });
 });
