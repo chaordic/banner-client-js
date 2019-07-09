@@ -59,6 +59,8 @@ import { BannerClient } from '@linx-impulse/banner-client-js';
     * **product**(object): object containing product data. Useful for product pages.
     * **tags**(array): array of tags of the page.
     * **url**(string): url of the page.
+    * **testGroup**(string): AB test group info.
+    * **searchQuery**(string): query terms used if in a search page.
 
 PS: *options* parameter is not required, neither any of these properties.
 
