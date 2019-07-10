@@ -84,6 +84,7 @@ export const BannerClient = {
     product,
     tags,
     url,
+    searchQuery,
   } = {}) {
     if (!page) {
       return Promise.reject(new TypeError('page is required to get banners'));
@@ -108,6 +109,7 @@ export const BannerClient = {
           productId: (product || {}).id,
           tagId: formattedTags(tags),
           url,
+          searchQuery,
         },
         success: resolve,
         error: reject,
