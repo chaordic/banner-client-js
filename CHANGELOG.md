@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.10.0"></a>
+# [1.10.0](https://github.com/chaordic/banner-client-js/compare/v1.9.2...v1.10.0) (2019-07-10)
+
+
+### Features
+
+* send search terms to banner server ([09ae10a](https://github.com/chaordic/banner-client-js/commit/09ae10a))
+
+
+
 <a name="1.9.2"></a>
 ## [1.9.2](https://github.com/chaordic/banner-client-js/compare/v1.9.0...v1.9.2) (2018-10-30)
 
