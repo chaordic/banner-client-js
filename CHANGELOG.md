@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.10.1"></a>
+## [1.10.1](https://github.com/chaordic/banner-client-js/compare/v1.10.0...v1.10.1) (2019-12-06)
+
+
+### Bug Fixes
+
+* check type product ([1ac15c4](https://github.com/chaordic/banner-client-js/commit/1ac15c4))
+
+
+
 <a name="1.10.0"></a>
 # [1.10.0](https://github.com/chaordic/banner-client-js/compare/v1.9.2...v1.10.0) (2019-07-10)
 
