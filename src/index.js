@@ -106,7 +106,7 @@ export const BannerClient = {
           homologation,
           testGroup,
           categoryId: formattedCategories(categories),
-          productId: (product || {}).id,
+          productId: (typeof product === 'string') ? product : (product || {}).id,
           tagId: formattedTags(tags),
           url,
           searchQuery,
