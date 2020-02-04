@@ -1,5 +1,6 @@
 import { ajax } from '@linx-impulse/commons-js/http/ajax';
-import { getCookie } from '@linx-impulse/commons-js/browser';
+import { getCookie } from '@linx-impulse/commons-js/browser/getCookie';
+import { formatCategories } from '@linx-impulse/commons-js/util/formatCategories';
 import config from './config';
 
 function formattedTags(tags) {
@@ -39,38 +40,6 @@ function getDeviceId() {
   return id;
 }
 
-function getFirstChild(categories, item) {
-  return (categories || []).find(category => (
-    !category.used
-    && Array.isArray(category.parents)
-    && category.parents.indexOf(item.id) !== -1
-  ));
-}
-
-function formattedCategories(categories) {
-  // Filter wrong formatted
-  const filteredCategories = (categories || [])
-    .filter(category => category && category.id)
-    .map(category => ({ id: category.id, parents: category.parents }));
-
-  // Find the root node
-  let item = filteredCategories.find(category => (
-    (
-      !category.parents || (
-        Array.isArray(category.parents) && !category.parents.length
-      )
-    )
-  ));
-  const ids = [];
-
-  while (typeof item === 'object') {
-    ids.push(item.id);
-    item.used = true;
-    item = getFirstChild(filteredCategories, item);
-  }
-  return ids;
-}
-
 export const BannerClient = {
   getRecommendations({
     page,
@@ -105,7 +74,7 @@ export const BannerClient = {
           userId,
           homologation,
           testGroup,
-          categoryId: formattedCategories(categories),
+          categoryId: formatCategories(categories),
           productId: (typeof product === 'string') ? product : (product || {}).id,
           tagId: formattedTags(tags),
           url,
