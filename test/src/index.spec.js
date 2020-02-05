@@ -97,7 +97,7 @@ describe('BannerClient.getRecommendations', function () {
       .rejectedWith(err);
   });
 
-  it('should pass formattedCategories to ajax request', function () {
+  it('should pass formatted categories to ajax request', function () {
     const categories = [
       {
         id: 'Autoajuda',
